@@ -13,7 +13,7 @@ var pwd;
 var id;
 
 function getBranch(){
-        cmd.get("git status | grep branch | awk '{print $3}';",
+        cmd.get("git status | grep branch | awk '{print $3;exit}';",
             function(err,data,stderr){
                 if (err){
                     logger.error(stderr)
