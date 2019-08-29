@@ -20,7 +20,7 @@ export default class Logger {
     private _error = function (...err: any[]){
         let  _errCount = 0
         Array.prototype.slice.call(arguments).forEach(
-            function(error:string){
+            (error:string) => {
                 _errCount += 1
                 this.log(chalk.red.bold(`ERROR! [${_errCount}] `) + chalk(`${error}`))
             });
