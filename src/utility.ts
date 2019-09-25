@@ -59,7 +59,8 @@ cmd.get(
 //get current charge
 //TODO add conditional to only display this when not fully charged
 cmd.get(
-    `ioreg -l | grep -i capacity | tr '\n' ' | ' | awk '{printf("%.2f%%", $10/$5 * 100)}';`,
+    /* not returning correct value when run by node */
+    `ioreg -l | awk '$3~/Capacity/{c[$3]=$5}END{OFMT="%.3f";max=c["\"MaxCapacity\""];print(max>0?100*c["\"CurrentCapacity\""]/max:"?")}'`,
     function(err:string, data:string, stderr:string){
         err ? logger.error(err, stderr) : logger.ok({msg:'current charge......', data:`${data}\n`})
     }
